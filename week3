@@ -73,4 +73,9 @@ FROM Permissions P
 
 --A list of users, the groups that they belong to, and the rooms to which they are assigned. This should be sorted alphabetically by user, then by group, then by room.
 
-
+SELECT U.name, G.groupName, R.roomName
+FROM Users U 
+	INNER JOIN Groups G ON U.groupID = G.groupID
+	RIGHT JOIN Permissions P ON P.groupID = G.groupID
+	RIGHT JOIN Rooms R ON R.roomID = P.roomID
+ORDER BY U.name, G.groupName, R.roomName
