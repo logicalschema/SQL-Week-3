@@ -55,7 +55,22 @@ INSERT INTO Permissions (groupID, roomID)
 VALUES (1,1), (1,2), (2,2), (2,3);
 
 --SELECT Statements
---All groups
 --All groups, and the users in each group. A group should appear even if there are no users assigned to the group.
+
+SELECT A.groupName, B.name 
+FROM Users B RIGHT JOIN Groups A
+ON B.groupID = A.groupID;
+
+
+
 --All rooms, and the groups assigned to each room. The rooms should appear even if no groups have been assigned to them.
+
+SELECT R.roomName, G.groupName
+FROM Permissions P
+	RIGHT JOIN Rooms R ON R.roomID = P.roomID
+	LEFT JOIN Groups G ON G.groupID = P.groupID;
+
+
 --A list of users, the groups that they belong to, and the rooms to which they are assigned. This should be sorted alphabetically by user, then by group, then by room.
+
+
